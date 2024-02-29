@@ -1,5 +1,5 @@
 const router = require('express').Router()
-require('./mongoDB/mongoconn')
+require('../mongoDB/mongoconn')
 
 const devices = require('./devices')
 router.use('/devices', devices)
