@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const MONGO_CONNECT = process.env.MONGO_CONNECT
 
-mongoose.connect('mongodb+srv://vinipinha:O8o1Zf4mEw3NnZ1C@cluster0.rnnuxu6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(MONGO_CONNECT)
   .then(() => {
     console.log('Conexão com o MongoDB realizada com sucesso');
   })
