@@ -4,10 +4,11 @@
   "description": "Sistema de monitoramento remoto de equipamentos industriais",
   "main": "server.js",
   "scripts": {
-    "backend": "nodemon .js",
-    "frontend": "cd frontend && npm start",
+    "backend": "nodemon server.js",
+    "frontend": "npm start --prefix frontend",
     "device": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "render-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
