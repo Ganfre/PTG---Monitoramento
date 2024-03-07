@@ -1,11 +1,12 @@
 import React from 'react';
+import SecaoResumo from '../componentes/SecaoResumo';
 
-const pageHome = ()=>{
+const PageHome = ()=>{
     return(
         <div>
-            <h1>Bem-vindo!</h1>
+            <SecaoResumo />
         </div>
     )
 }
 
-export default pageHome
+export default PageHome
