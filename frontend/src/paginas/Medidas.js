@@ -1,10 +1,32 @@
 import React from 'react';
+import styled from 'styled-components';
+import Cards from '../componentes/Cards';
+import {useApi} from '../hooks/useApi';
+
+const ListaCards = styled.div`
+    display: grid;
+    grid-template-columns: 260px repeat(auto-fill, 260px);
+    grid-column-gap: 3rem;
+    grid-row-gap: 5rem 10rem;
+`;
+
+const ListaDevices = styled.div`
+    min-height: 30vh;
+    overflow: hidden;
+    padding: 5rem 10rem;
+`;
 
 const Medidas = ()=>{
+    const {data} = useApi('/devices')
+    console.log(data)
     return(
-        <div>
-            <h1>Medidas</h1>
-        </div>
+        <ListaDevices>
+            <ListaCards>
+                {data?.data?.message?.map(projeto =>{
+                    return(<Cards key={projeto._id}projeto={projeto} />)
+                })}
+            </ListaCards>
+        </ListaDevices>
     )
 }
 
