@@ -5,8 +5,8 @@ import {useApi} from '../hooks/useApi';
 
 const ListaCards = styled.div`
     display: grid;
-    grid-template-columns: 260px repeat(auto-fill, 260px);
-    grid-column-gap: 3rem;
+    grid-template-columns: 200px repeat(auto-fill, 200px);
+    grid-column-gap: 5rem;
     grid-row-gap: 5rem 10rem;
 `;
 

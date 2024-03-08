@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyleCard = styled.div`
     box-sizing: border-box;
+    height: 21rem;
+    width: 15rem;
     background-color: #58617b;
     border-color: black;
     border-radius: 0.8rem;
@@ -11,6 +14,11 @@ const StyleCard = styled.div`
 
     a{
         text-decoration: none;
+    }
+
+    img{
+        width: 100%;
+        height: 10rem;
     }
 `;
 
@@ -25,20 +33,21 @@ const Conteudo = styled.div`
         color: white;
         font-weight: bold;
         text-align: center;
-        padding: 0.6rem;
+        padding-bottom: 0.8rem;
     }
 
-    h4{
+    h5{
         display: flex;
-        padding-left: 0.8rem;
-        padding-bottom: 0.5rem;
+        padding-left: 1.1rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.2rem;
         color: black;
         font-weight: bold;
     }
 
 `;
 
-const H4 =styled.div`
+const H5 =styled.div`
     color: white;
     font-weight: bold;
 `;
@@ -53,12 +62,16 @@ const Cards = ({projeto})=>{
         <>
             <StyleCard>
                 <Conteudo>
-                    <h3>{projeto.nome}</h3>
-                    <img src={projeto.imagem} alt='imagem'/>
-                    <Info>
-                        <h4>Temperatura:&nbsp;<H4>{projeto.temperatura}</H4>&nbsp;&nbsp;&nbsp;Vibração:&nbsp;<H4>{projeto.vibracao}</H4>&nbsp;&nbsp;&nbsp;</h4>
-                        <h4>Corrente:&nbsp;<H4>{projeto.corrente}</H4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rpm:&nbsp;<H4>{projeto.rpm}</H4></h4>
-                    </Info>
+                    <Link to={`/medidas/${projeto._id}`}>
+                        <h3>{projeto.nome}</h3>
+                        <img src={projeto.imagem} alt='imagem'/>
+                        <Info>
+                            <h5>Temperatura:&nbsp;<H5>{projeto.temperatura}ºC</H5></h5>
+                            <h5>Vibração:&nbsp;<H5>{projeto.vibracao}</H5></h5>
+                            <h5>Corrente:&nbsp;<H5>{projeto.corrente}A</H5></h5>
+                            <h5>Rpm:&nbsp;<H5>{projeto.rpm}</H5></h5>
+                        </Info>
+                    </Link>
                 </Conteudo>
             </StyleCard>
         </>

@@ -6,6 +6,7 @@ import Medidas from './paginas/Medidas';
 import Admin from './paginas/Admin';
 import Mensagens from './paginas/Mensagens';
 import Menu from './componentes/Menu';
+import DetalhesDevice from './componentes/DetalhesDevices';
 
 function App(){
   return(
@@ -15,6 +16,7 @@ function App(){
       <Routes>
         <Route path='/' element= {<PageHome />} />
         <Route path='/medidas' element= {<Medidas />} />
+        <Route path='/medidas/:id' element= {<DetalhesDevice />} />
         <Route path='/admin' element= {<Admin />} />
         <Route path='/mensagens' element= {<Mensagens />} />
       </Routes>

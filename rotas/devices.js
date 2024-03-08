@@ -17,6 +17,24 @@ router.get('/', async (req, res)=>{
     }
 })
 
+router.get('/:id', async (req, res)=>{
+    try{
+        const deviceID = await Device.findById({
+            _id: req.params.id
+        })
+        res.json({
+            success: true,
+            message: deviceID
+        })
+    }
+    catch{
+        res.json({
+            success: false,
+            message: "Não foi possível listar os devices."
+        })
+    }
+})
+
 router.post('/', async (req, res)=>{
     const novoDevice = new Device({
         nome: req.body.nome,
