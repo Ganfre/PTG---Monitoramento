@@ -5,7 +5,7 @@ import moment from "moment";
 import { useApi } from '../hooks/useApi';
 import CaixaDialogo from './CaixaDialogo';
 import FormEdit from './FormEdit';
-//import {deleteRegistro, editRegistro} from '../servicos/api'
+import { deleteRegistro, editRegistro } from '../servicos/api';
 
 const Foto = styled(Image)`
     height: 50px;
@@ -13,18 +13,16 @@ const Foto = styled(Image)`
 `;
 
 function AdmDevices() {
-
-    const del = ()=>{
-        //deleteRegistro(id)
-        console.log("escolheu deletar")
+    
+    const del = (id)=>{
+        deleteRegistro(id)
     }
 
     const ed = ()=>{
-       // editRegistro()
-       console.log("escolheu deletar")
+       editRegDevice()
     }
     
-    const [escolha, setEscolha] = useState({
+    const [escolha] = useState({
         delete:{
             header: 'Confirma Exclusão?',
             variant: 'danger',
@@ -42,7 +40,6 @@ function AdmDevices() {
         }
     })
   
-    const [header, setHeader] = useState()
     const [nome, setNome] = useState()
     const [descricao, setDescricao] = useState()
     const [imagem, setImagem] = useState()
@@ -70,17 +67,13 @@ function AdmDevices() {
         setImagem(device.imagem)
     }
 
-    const editRegistro = (id, data)=>{
+    const editRegDevice = (id, data)=>{
         const newRegDevice = {
             nome: data.nome,
             descricao: data.descricao,
             imagem: data.imagem
         }
         editRegistro(id, newRegDevice)
-    }
-
-    const deleteRegistro = (id)=>{
-   
     }
 
     return (

@@ -29,18 +29,19 @@ const Conteudo = styled.div`
     width: 100%;
     height: 100%;
 
-    h3{
+    h4{
         color: white;
         font-weight: bold;
         text-align: center;
         padding-bottom: 0.8rem;
     }
 
-    h5{
+    h6{
         display: flex;
         padding-left: 1.1rem;
         padding-top: 0.3rem;
         padding-bottom: 0.2rem;
+        margin-bottom: none;
         color: black;
         font-weight: bold;
     }
@@ -63,13 +64,13 @@ const Cards = ({projeto})=>{
             <StyleCard>
                 <Conteudo>
                     <Link to={`/medidas/${projeto._id}`}>
-                        <h3>{projeto.nome}</h3>
+                        <h4>{projeto.nome}</h4>
                         <img src={projeto.imagem} alt='imagem'/>
                         <Info>
-                            <h5>Temperatura:&nbsp;<H5>{projeto.temperatura}ºC</H5></h5>
-                            <h5>Vibração:&nbsp;<H5>{projeto.vibracao}</H5></h5>
-                            <h5>Corrente:&nbsp;<H5>{projeto.corrente}A</H5></h5>
-                            <h5>Rpm:&nbsp;<H5>{projeto.rpm}</H5></h5>
+                            <h6>Temperatura:&nbsp;<H5>{projeto.temperatura}ºC</H5></h6>
+                            <h6>Vibração:&nbsp;<H5>{projeto.vibracao}</H5></h6>
+                            <h6>Corrente:&nbsp;<H5>{projeto.corrente}A</H5></h6>
+                            <h6>Rpm:&nbsp;<H5>{projeto.rpm}</H5></h6>
                         </Info>
                     </Link>
                 </Conteudo>

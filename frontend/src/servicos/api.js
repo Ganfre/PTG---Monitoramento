@@ -7,7 +7,12 @@ const api = axios.create({
 export default api
 
 export const deleteRegistro = (id)=>{
-    console.log('chamada de del')
+    axios.delete(`/api/devices/${id}`)
+        .then(response =>{
+            console.log(response)
+            return response
+        })
+        .catch(err => console.log(err))
 }
 
 export const editRegistro = ()=>{
