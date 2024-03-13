@@ -19,6 +19,7 @@ const StyledMenu = styled.div`
 
     li{
         padding-left: 2rem;
+        padding-top: 1rem;
     }
 
     a{

@@ -33,14 +33,12 @@ const Conteudo = styled.div`
         color: white;
         font-weight: bold;
         text-align: center;
-        padding-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
     }
 
     h6{
         display: flex;
         padding-left: 1.1rem;
-        padding-top: 0.3rem;
-        padding-bottom: 0.2rem;
         margin-bottom: none;
         color: black;
         font-weight: bold;
@@ -55,7 +53,7 @@ const H5 =styled.div`
 
 
 const Info = styled.div`
-    
+    padding-top: 0.4rem;
 `;
 
 const Cards = ({projeto})=>{
