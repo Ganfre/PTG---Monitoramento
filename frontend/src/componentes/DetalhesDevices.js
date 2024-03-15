@@ -1,44 +1,50 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
-import moment from 'moment'
+import {Container, Table} from 'react-bootstrap'
 import styled from "styled-components";
+//import moment from 'moment'
 
-const Pag = styled.div`
-    padding-top: 3rem;
-`;
-
-const Geral = styled.div`
-    background-color: white;
-    width: 70%;
-    min-height: 70vh;
-    position: absolute;
-    left: 15%;
-
-    h2{
+const Titulo = styled.div`
+    h4{
         padding-left: 1rem;
-    }
-
-    img{
-        width: 200px;
-        padding-left: 1rem;
+        font-weight: bold;
+        color: yellow;
     }
 `;
 
 const DetalhesDevice = ()=>{
     const {id} = useParams()
-    const {data} = useApi(`/devices/${id}`)
+    const {data} = useApi(`/devices/detalhes/${id}`)
     console.log(data)
     return(
-        <Pag>
-            <Geral>
-                <h2>{data?.data?.message?.nome}</h2>
-                <h2>{moment(data?.data?.message?.data).format('DD-MM-YYYY')}</h2>
-                <h2>Consumo mensal</h2>
-                <h2>Consumo diário</h2>
-                <img src={data?.data?.message?.imagem} alt='imagem' />
-            </Geral>
-        </Pag>
+        <Container>
+            <Titulo><h4>{data?.data?.message?.nome}</h4></Titulo>
+            <Table striped bordered hover variant="dark">
+            <thead>
+                    <tr>
+                        <th>Temperatura</th>
+                        <th>Vibração</th>
+                        <th>Corrente</th>
+                        <th>RPM</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data?.data?.message?.medidas?.map(med =>{
+                        return(<tr>
+                            <td>{med.temperatura}</td>
+                            <td>{med.vibracao}</td>
+                            <td>{med.corrente}</td>
+                            <td>{med.rpm}</td>
+                            <td>{med.data}</td>
+                            <td>{med.hora}'</td> 
+                        </tr>)
+                    })}
+                </tbody>
+            </Table>
+        </Container>
     )
 }
 

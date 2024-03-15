@@ -17,7 +17,7 @@ router.get('/', async (req, res)=>{
     }
 })
 
-router.get('/:id', async (req, res)=>{
+router.get('/detalhes/:id', async (req,res)=>{
     try{
         const deviceID = await Device.findById({
             _id: req.params.id
@@ -27,23 +27,25 @@ router.get('/:id', async (req, res)=>{
             message: deviceID
         })
     }
-    catch{
+    catch(err){
         res.json({
             success: false,
-            message: "Não foi possível listar os devices."
+            data: err
         })
     }
 })
 
+
 router.post('/', async (req, res)=>{
     const novoDevice = new Device({
         nome: req.body.nome,
+        descricao: req.body.descricao,
         email: req.body.email,
-        imagem: req.body.imagem,
-        temperatura: req.body.temperatura,
-        vibracao: req.body.vibracao,
-        corrente: req.body.corrente,
-        rpm: req.body.rpm
+        imagem: req.body.imagem
+        //temperatura: req.body.temperatura,
+        //vibracao: req.body.vibracao,
+        //corrente: req.body.corrente,
+        //rpm: req.body.rpm
     })
     try{
         const saveNewDevice = await novoDevice.save()
@@ -60,39 +62,16 @@ router.post('/', async (req, res)=>{
     }
 })
 
-router.put('/:id', async (req, res)=>{
+router.put('/:id', async (req,res)=>{
     try{
-        const updateDevideId = await Device.updateOne(
-            {_id: req.params.id},
-            {temperatura: req.body.temperatura,
-            vibracao: req.body.vibracao,
-            corrente: req.body.corrente,
-            rpm: req.body.rpm}
+        const updateDeviceId = await Device.updateOne({_id: req.params.id},{$push: {medidas: req.body.medidas}}
         )
         res.json({
             success: true,
-            updated: updateDevideId.nModified
+            updated: updateDeviceId.nModified
         })
-    }
-    catch(err){
-        res.json({
-            success: false,
-            message: "Não foi possível atualizar o device."
-        })
-    }
-})
 
-router.delete('/:id', async (req,res)=>{
-    try{
-        const deleteMedidasId = await Medidas.deleteOne({
-            _id: req.params.id
-        })
-        res.json({
-            success: true,
-            data: deleteMedidasId
-        })
-    }
-    catch(err){
+    }catch(err){
         res.json({
             success: false,
             data: err

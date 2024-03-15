@@ -2,7 +2,8 @@ import React from 'react'
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle} from 'react-bootstrap'
 
 function CaixaDialogo({show, setShow, escAtual, id, email, children}) {
-    const acao=()=>{
+    const acao =()=>{
+        console.log(children)
         escAtual.callback(id)
         setShow(false)
     }
@@ -27,7 +28,8 @@ function CaixaDialogo({show, setShow, escAtual, id, email, children}) {
                     <Button variant={escAtual.variant} onClick={()=> setShow(false)}>Cancelar</Button>
                     <Button variant={escAtual.variant} onClick={()=> acao()}>{escAtual.label}</Button>
                 </ModalFooter>
-        </Modal>  )
+        </Modal>  
+    )
 }
 
 export default CaixaDialogo

@@ -2,79 +2,90 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const StyleCard = styled.div`
+const StyledCard = styled.div`
     box-sizing: border-box;
-    height: 21rem;
-    width: 15rem;
-    background-color: #58617b;
+    background-color: #58617B;
     border-color: black;
-    border-radius: 0.8rem;
+    border-radius: 1rem;
     cursor: pointer;
-    overflow: hidden;
-
+    overflow: hidden; 
     a{
         text-decoration: none;
     }
 
-    img{
-        width: 100%;
-        height: 10rem;
-    }
 `;
 
-const Conteudo = styled.div`
+const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
     height: 100%;
-
-    h4{
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        padding-bottom: 0.4rem;
-    }
-
     h6{
-        display: flex;
-        padding-left: 1.1rem;
-        margin-bottom: none;
+        padding-left: 1rem;
         color: black;
         font-weight: bold;
+        line-height: 12px;
+     }
+    h5{
+        text-align: center;
+        color: white;
+        font-weight: normal;
     }
-
+    h4{
+        text-align: center;
+        color: white;
+        font-weight: normal;
+        padding-top: 6px;
+        font-weight: bold;
+    }
+    h6T{
+        text-align: center;
+        color: yellow;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 5px;
+        padding-bottom: 10px;
+    }
+    lb{
+        color: white; 
+    }
+    img{
+        padding-bottom: 1rem;
+        max-width:200px;
+        max-height:200px;
+        width: auto;
+        height: auto;
+    }
 `;
-
-const H5 =styled.div`
-    color: white;
-    font-weight: bold;
-`;
-
 
 const Info = styled.div`
-    padding-top: 0.4rem;
+    text-decoration: none;
+    padding-bottom: 8px;
 `;
 
 const Cards = ({projeto})=>{
+    console.log(projeto)
+    var ultimo = projeto.medidas.length
+    console.log(ultimo)
     return(
-        <>
-            <StyleCard>
-                <Conteudo>
-                    <Link to={`/medidas/${projeto._id}`}>
-                        <h4>{projeto.nome}</h4>
-                        <img src={projeto.imagem} alt='imagem'/>
-                        <Info>
-                            <h6>Temperatura:&nbsp;<H5>{projeto.temperatura}ºC</H5></h6>
-                            <h6>Vibração:&nbsp;<H5>{projeto.vibracao}</H5></h6>
-                            <h6>Corrente:&nbsp;<H5>{projeto.corrente}A</H5></h6>
-                            <h6>Rpm:&nbsp;<H5>{projeto.rpm}</H5></h6>
-                        </Info>
-                    </Link>
-                </Conteudo>
-            </StyleCard>
-        </>
+        <StyledCard>
+            <Link to={`/medidas/${projeto._id}`}>
+                <Content>
+                    <h4>{projeto.nome}</h4>
+                    <img src= {projeto.imagem} alt="Description"/>
+                    <h5>Medidas Atuais:</h5>
+                    <h6T>{projeto.medidas[ultimo-1].data} {projeto.medidas[ultimo-1].hora}</h6T>
+                    <h6T>{projeto.medidas[ultimo-1].netst}</h6T>
+                    <Info>
+                        <h6>Temperatura: <lb>{projeto.medidas[ultimo-1].temperatura}°C</lb></h6>
+                        <h6>Vibração: <lb>{projeto.medidas[ultimo-1].vibracao}Hz</lb></h6>
+                        <h6>Corrente: <lb>{projeto.medidas[ultimo-1].corrente}A</lb></h6>
+                        <h6>RPM: <lb>{projeto.medidas[ultimo-1].rpm}rpm</lb></h6>
+                    </Info>
+                </Content>
+            </Link>
+        </StyledCard>
     )
 }
-
 export default Cards
