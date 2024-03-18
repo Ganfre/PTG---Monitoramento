@@ -41,11 +41,11 @@ router.post('/', async (req, res)=>{
         nome: req.body.nome,
         descricao: req.body.descricao,
         email: req.body.email,
-        imagem: req.body.imagem
-        //temperatura: req.body.temperatura,
-        //vibracao: req.body.vibracao,
-        //corrente: req.body.corrente,
-        //rpm: req.body.rpm
+        imagem: req.body.imagem,
+        temperatura: req.body.temperatura,
+        vibracao: req.body.vibracao,
+        corrente: req.body.corrente,
+        rpm: req.body.rpm
     })
     try{
         const saveNewDevice = await novoDevice.save()
@@ -72,6 +72,46 @@ router.put('/:id', async (req,res)=>{
         })
 
     }catch(err){
+        res.json({
+            success: false,
+            data: err
+        })
+    }
+})
+
+router.delete('/:id', async (req,res)=>{
+    try{
+        const deleteMedidasId = await Device.deleteOne({
+            _id: req.params.id   
+        });
+        res.json({
+            success: true,
+            data: deleteMedidasId
+        })
+    }catch(err){
+        res.json({
+            success: false,
+            data: err
+        })
+    }
+})
+
+router.patch('/:id', async(req,res)=>{
+    try{
+        const updateDevice = await Device.updateOne(
+            {_id: req.params.id},
+            {
+                nome: req.body.nome,
+                descricao:req.body.descricao,
+                imagem: req.body.imagem
+            }
+        )
+            res.json({
+                success: true,
+                updated: updateDevice.nModified
+            })
+    }
+    catch{
         res.json({
             success: false,
             data: err

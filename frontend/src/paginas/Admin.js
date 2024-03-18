@@ -4,6 +4,7 @@ import {Tabs, Tab, Container} from 'react-bootstrap'
 import ListaDevices from '../componentes/ListaDevices';
 import AdmDevices from '../componentes/AdmDevices';
 import FormEdit from '../componentes/FormEdit';
+import NovoDevice from '../componentes/NovoDevice';
 
 const Descricao = styled.div`
     flex: 1;
@@ -25,7 +26,7 @@ const Admin = ()=>{
             <h1>Administração</h1>
         </Descricao>
         <Tabs
-            defaultActiveKey="profile" id="adm" className="mb-3">
+            defaultActiveKey="devices" id="adm" className="mb-1">
             <Tab eventKey="devices" title="Meus Devices">
                 <ListaDevices />
             </Tab>
@@ -33,7 +34,7 @@ const Admin = ()=>{
                 <AdmDevices />
             </Tab>
             <Tab eventKey="novo" title="Novo Device">
-                <h2>Novo Device</h2>
+                <NovoDevice />
             </Tab>
         </Tabs>
       </Container>

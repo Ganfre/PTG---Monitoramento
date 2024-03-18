@@ -4,7 +4,7 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle} from 're
 function CaixaDialogo({show, setShow, escAtual, id, email, children}) {
     const acao =()=>{
         console.log(children)
-        escAtual.callback(id)
+        escAtual.callback(id, children[1].props)
         setShow(false)
     }
   return (

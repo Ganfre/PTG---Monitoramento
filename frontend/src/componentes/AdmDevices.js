@@ -5,7 +5,7 @@ import moment from "moment";
 import { useApi } from '../hooks/useApi';
 import CaixaDialogo from './CaixaDialogo';
 import FormEdit from './FormEdit';
-import { editRegistro } from '../servicos/api';
+import { editRegistro, deleteRegistro } from '../servicos/api';
 
 
 const Foto = styled(Image)`
@@ -15,23 +15,23 @@ const Foto = styled(Image)`
 
 function AdmDevices() {
     
-    // const del = (id)=>{
-    //     deleteRegistro(id)
-    // }
+    const del = (id)=>{
+        deleteRegistro(id)
+    }
 
-    const ed = ()=>{
-        editRegistro()
+    const ed = (id, data)=>{
+        editRegDevice(id, data)
     }
     
     const [escolha, setEscolha] = useState({
-        // delete:{
-        //     header: 'Confirma Exclusão?',
-        //     variant: 'danger',
-        //     label: 'OK',
-        //     mostraBody: true,
-        //     body: 'Tem certeza que deseja deletar o registro?',
-        //     callback: del
-        // },
+        delete:{
+            header: 'Confirma Exclusão?',
+            variant: 'danger',
+            label: 'OK',
+            mostraBody: true,
+            body: 'Tem certeza que deseja deletar o registro?',
+            callback: del
+        },
         edit:{
             header: 'Edita Device',
             variant: 'primary',
@@ -99,7 +99,7 @@ function AdmDevices() {
                                     <td>{moment(item.data).format('DD-MM-YYYY')}</td>
                                     <td>
                                         <Button variant="info" onClick={()=> manipulaShow(item, escolha.edit)}>Editar</Button>&nbsp;&nbsp;
-                                        {/* <Button variant="danger" onClick={()=> manipulaShow(item, escolha.delete)}>Deletar</Button> */}
+                                        <Button variant="danger" onClick={()=> manipulaShow(item, escolha.delete)}>Deletar</Button>
                                     </td>
                                 </tr>)
                         })}
