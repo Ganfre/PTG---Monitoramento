@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Cards from '../componentes/Cards';
 import {useApi} from '../hooks/useApi';
+import { useNavigate } from 'react-router-dom';
+import Userfront from '@userfront/toolkit';
 
 const ListaCards = styled.div`
     display: grid;
@@ -17,6 +19,12 @@ const ListaDevices = styled.div`
 `;
 
 const Medidas = ()=>{
+    let navigate = useNavigate()
+    useEffect(()=>{
+        if(!Userfront.accessToken()){
+            return navigate('/login')
+        }
+    })
     const {data} = useApi('/devices')
     console.log(data)
     return(
