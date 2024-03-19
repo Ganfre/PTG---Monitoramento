@@ -7,6 +7,8 @@ import Admin from './paginas/Admin';
 import Mensagens from './paginas/Mensagens';
 import Menu from './componentes/Menu';
 import DetalhesDevice from './componentes/DetalhesDevices';
+import { SignupForm, LoginForm } from './componentes/autenticacao/Autenticacao';
+import Logout from './paginas/Logout';
 
 function App(){
   return(
@@ -19,6 +21,9 @@ function App(){
         <Route path='/medidas/:id' element= {<DetalhesDevice />} />
         <Route path='/admin' element= {<Admin />} />
         <Route path='/mensagens' element= {<Mensagens />} />
+        <Route path='/cadastro' element= {<SignupForm />} />
+        <Route path='/login' element= {<LoginForm />} />
+        <Route path='/logout' element= {<Logout />} />
       </Routes>
     </Router>
   ) 

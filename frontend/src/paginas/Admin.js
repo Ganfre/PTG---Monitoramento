@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {Tabs, Tab, Container} from 'react-bootstrap'
 import ListaDevices from '../componentes/ListaDevices';
 import AdmDevices from '../componentes/AdmDevices';
-import FormEdit from '../componentes/FormEdit';
+//import FormEdit from '../componentes/FormEdit';
+import { useNavigate } from 'react-router-dom';
 import NovoDevice from '../componentes/NovoDevice';
+import Userfront from '@userfront/toolkit';
 
 const Descricao = styled.div`
     flex: 1;
@@ -20,6 +22,12 @@ const Descricao = styled.div`
 `;
 
 const Admin = ()=>{
+    let navigate = useNavigate()
+    useEffect(()=>{
+        if(!Userfront.accessToken()){
+            return navigate('/login')
+        }
+    })
     return(
         <Container>
         <Descricao>

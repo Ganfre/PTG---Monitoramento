@@ -1,6 +1,8 @@
 import React from 'react'
+import Userfront from '@userfront/toolkit'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import { LogoutButton } from './autenticacao/Autenticacao';
 
 const StyledMenu = styled.div`
     background: #00648F;
@@ -37,9 +39,23 @@ const Menu = ()=>{
             <h1>SensorSync</h1>
             <ul>
                 <li><Link to='/'>Home</Link></li>
-                <li><Link to='/medidas'>Medidas</Link></li>
-                <li><Link to='/admin'>Administrador</Link></li>
                 <li><Link to='/mensagens'>Mensagens</Link></li>
+                {!Userfront.accessToken() && (
+                        <>
+                            <li><Link to='/cadastro'>Cadastrar</Link></li>
+                            <li><Link to='/login'>Login</Link></li>
+                        </>
+                    )
+                }
+                {Userfront.accessToken() && (
+                        <>
+                            <li><Link to='/medidas'>Medidas</Link></li>
+                            <li><Link to='/admin'>Administrador</Link></li>
+                            <li><Link to='/logout'><LogoutButton /></Link></li>
+                        </>
+                    )
+                }
+                
             </ul>
         </StyledMenu>
     )
