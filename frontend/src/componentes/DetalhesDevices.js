@@ -1,15 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
-import {Container, Table} from 'react-bootstrap'
+import {Container, Table} from 'react-bootstrap';
 import styled from "styled-components";
+import Graph from "./Graficos";
 //import moment from 'moment'
 
 const Titulo = styled.div`
     h4{
         padding-left: 1rem;
         font-weight: bold;
-        color: yellow;
+        color: White;
     }
 `;
 
@@ -17,6 +18,7 @@ const DetalhesDevice = ()=>{
     const {id} = useParams()
     const {data} = useApi(`/devices/detalhes/${id}`)
     console.log(data)
+    const medidas = data?.data?.message?.medidas || [];
 
     let ultimasMedidas = [];
     if (data?.data?.message?.medidas) {
@@ -50,6 +52,12 @@ const DetalhesDevice = ()=>{
                     )}
                 </tbody>
             </Table>
+                <div>
+                    <Graph data={medidas.map((med) => ({ data: med.data, value: med.temperatura }))} title="Temperatura (°C)" />
+                    <Graph data={medidas.map((med) => ({ data: med.data, value: med.vibracao }))} title="Vibração (Hz)" />
+                    <Graph data={medidas.map((med) => ({ data: med.data, value: med.corrente }))} title="Corrente (A)" />
+                    <Graph data={medidas.map((med) => ({ data: med.data, value: med.rpm }))} title="RPM" />
+                </div>
         </Container>
     )
 }

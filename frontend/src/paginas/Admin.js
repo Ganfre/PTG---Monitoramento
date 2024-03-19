@@ -11,13 +11,12 @@ import Userfront from '@userfront/toolkit';
 const Descricao = styled.div`
     flex: 1;
     padding-right: 5rem;
-    background: black;
     z-index: 5;
 
     h1{
         padding-left: 1rem;
         font-weight: bold;
-        color: yellow;
+        color: white;
     }
 `;
 

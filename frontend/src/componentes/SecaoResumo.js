@@ -23,6 +23,10 @@ const Descricao = styled.div`
         font-size: 2rem;
         color: white;
     }
+    p{
+        font-size: 20px;
+        text-align: justify;
+    }
 `;
 
 const SecaoResumo = ()=>{
@@ -32,14 +36,12 @@ const SecaoResumo = ()=>{
                 <h1>PTG - SensorSync</h1>
                 <h2>Automação Industrial</h2>
                 <p>
-                    It is a long established fact that a reader will be distracted by the readable content of a page when 
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution 
-                    of letters, as opposed to using 'Content here, content here', making it look like readable English. Many 
-                    desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a 
-                    search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved 
-                    over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    Plataforma de Monitoramento de Equipamentos Industriais em Tempo Real: Nosso projeto oferece uma solução para 
+                    o monitoramento contínuo de equipamentos industriais. Através de nossa plataforma, é possível acompanhar em tempo 
+                    real o funcionamento e desempenho dos seus equipamentos. Detecte falhas e anomalias instantaneamente, permitindo 
+                    uma intervenção rápida e eficaz. Otimize a eficiência operacional e minimize o tempo de inatividade com nosso sistema 
+                    de monitoramento em tempo real.
                 </p>
-                <button>Entre em contato</button>
             </Descricao>
         </Inicio>
     )
