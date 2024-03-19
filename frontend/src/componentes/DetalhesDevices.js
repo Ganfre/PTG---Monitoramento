@@ -17,6 +17,12 @@ const DetalhesDevice = ()=>{
     const {id} = useParams()
     const {data} = useApi(`/devices/detalhes/${id}`)
     console.log(data)
+
+    let ultimasMedidas = [];
+    if (data?.data?.message?.medidas) {
+        ultimasMedidas = data.data.message.medidas.slice(-3);
+    }
+
     return(
         <Container>
             <Titulo><h4>{data?.data?.message?.nome}</h4></Titulo>
@@ -32,16 +38,16 @@ const DetalhesDevice = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.data?.message?.medidas?.map(med =>{
-                        return(<tr>
-                            <td>{med.temperatura}</td>
-                            <td>{med.vibracao}</td>
-                            <td>{med.corrente}</td>
-                            <td>{med.rpm}</td>
+                    {ultimasMedidas.map(med => (
+                        <tr>
+                            <td style={med.temperatura > 85 ? {color: "red"}:{color: "white"}}>{med.temperatura}°C</td>
+                            <td style={med.vibracao > 15 ? {color: "red"}:{color: "white"}}>{med.vibracao} Hz</td>
+                            <td style={med.corrente > 10 ? {color: "red"}:{color: "white"}}>{med.corrente} A</td>
+                            <td style={med.rpm < 800 ? {color: "red"}:{color: "white"}}>{med.rpm}</td>
                             <td>{med.data}</td>
-                            <td>{med.hora}'</td> 
+                            <td>{med.hora}h</td> 
                         </tr>)
-                    })}
+                    )}
                 </tbody>
             </Table>
         </Container>

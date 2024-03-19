@@ -78,10 +78,10 @@ const Cards = ({projeto})=>{
                     <h6T>{projeto.medidas[ultimo-1].data} {projeto.medidas[ultimo-1].hora}</h6T>
                     <h6T>{projeto.medidas[ultimo-1].netst}</h6T>
                     <Info>
-                        <h6>Temperatura: <lb>{projeto.medidas[ultimo-1].temperatura}°C</lb></h6>
-                        <h6>Vibração: <lb>{projeto.medidas[ultimo-1].vibracao}Hz</lb></h6>
-                        <h6>Corrente: <lb>{projeto.medidas[ultimo-1].corrente}A</lb></h6>
-                        <h6>RPM: <lb>{projeto.medidas[ultimo-1].rpm}rpm</lb></h6>
+                        <h6>Temperatura: <span style={{color: projeto.medidas[ultimo-1].temperatura > 85 ? "red" : "white"}}>{projeto.medidas[ultimo-1].temperatura}°C</span></h6>
+                        <h6>Vibração: <span style={{color: projeto.medidas[ultimo-1].vibracao > 15 ? "red" : "white"}}>{projeto.medidas[ultimo-1].vibracao}Hz</span></h6>
+                        <h6>Corrente: <span style={{color: projeto.medidas[ultimo-1].corrente > 10 ? "red" : "white"}}>{projeto.medidas[ultimo-1].corrente}A</span></h6>
+                        <h6>RPM: <span style={{color: projeto.medidas[ultimo-1].rpm < 800 ? "red" : "white"}}>{projeto.medidas[ultimo-1].rpm}rpm</span></h6>
                     </Info>
                 </Content>
             </Link>
