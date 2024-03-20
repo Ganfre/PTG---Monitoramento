@@ -6,7 +6,6 @@ import moment from "moment";
 
 const Foto = styled(Image)`
     height: 50px;
-
 `;
 
 const ListaDevices = ()=>{
@@ -17,6 +16,7 @@ const ListaDevices = ()=>{
                 <thead>
                     <tr>
                         <th>Foto</th>
+                        <th>Descrição</th>
                         <th>Device</th>
                         <th>Data</th>
                     </tr>
@@ -26,6 +26,7 @@ const ListaDevices = ()=>{
                         return(
                             <tr>
                                 <td><Foto src={item.imagem}></Foto></td>
+                                <td>{item.descricao}</td>
                                 <td>{item.nome}</td>
                                 <td>{moment(item.data).format('DD-MM-YYYY')}</td>
                             </tr>)

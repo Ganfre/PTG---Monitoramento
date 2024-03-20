@@ -6,7 +6,7 @@ const Inicio = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5rem 10rem;
+    padding-left: 12rem;
     color: black;
 `;
 
@@ -16,16 +16,17 @@ const Descricao = styled.div`
     h1{
         font-weight: bold;
         font-size: 3rem;
-        color: white;
+        color: black;
     }
     h2{
         font-weight: bold;
         font-size: 2rem;
-        color: white;
+        color: black;
     }
     p{
         font-size: 20px;
         text-align: justify;
+        color: black;
     }
 `;
 

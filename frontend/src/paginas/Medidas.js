@@ -15,7 +15,12 @@ const ListaCards = styled.div`
 const ListaDevices = styled.div`
     min-height: 30vh;
     overflow: hidden;
-    padding: 5rem 10rem;
+    padding-left: 7rem;
+    h1{
+        font-weight: bold;
+        color: #111827;
+        padding: 1rem 1rem 1rem 0rem;
+    }
 `;
 
 const Medidas = ()=>{
@@ -29,6 +34,7 @@ const Medidas = ()=>{
     console.log(data)
     return(
         <ListaDevices>
+            <h1>Medidas</h1>
             <ListaCards>
                 {data?.data?.message?.map(projeto =>{
                     return(<Cards key={projeto._id}projeto={projeto} />)

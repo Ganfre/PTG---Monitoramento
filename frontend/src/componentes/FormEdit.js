@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Container} from 'react-bootstrap'
-import styled from 'styled-components'
+//import styled from 'styled-components'
 
 function FormEdit({nome, setNome, descricao, setDescricao, imagem, setImagem}) {
   return (

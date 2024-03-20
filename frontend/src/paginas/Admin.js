@@ -14,9 +14,18 @@ const Descricao = styled.div`
     z-index: 5;
 
     h1{
-        padding-left: 1rem;
         font-weight: bold;
-        color: white;
+        color: #111827;
+        padding: 1rem 1rem 1rem 0rem;
+    }
+`;
+
+const AdmContainer = styled.div`
+    padding-left: 6rem;
+    padding-right: 1rem;
+
+    .nav-link {
+        color: #111827;
     }
 `;
 
@@ -28,23 +37,25 @@ const Admin = ()=>{
         }
     })
     return(
-        <Container>
-        <Descricao>
-            <h1>Administração</h1>
-        </Descricao>
-        <Tabs
-            defaultActiveKey="devices" id="adm" className="mb-1">
-            <Tab eventKey="devices" title="Meus Devices">
-                <ListaDevices />
-            </Tab>
-            <Tab eventKey="detalhes" title="Detalhes">
-                <AdmDevices />
-            </Tab>
-            <Tab eventKey="novo" title="Novo Device">
-                <NovoDevice />
-            </Tab>
-        </Tabs>
-      </Container>
+        <AdmContainer>
+            <Container>
+                <Descricao>
+                    <h1>Administração</h1>
+                </Descricao>
+                <Tabs
+                    defaultActiveKey="devices" id="adm" className="mb-1">
+                    <Tab eventKey="devices" title="Meus Devices">
+                        <ListaDevices />
+                    </Tab>
+                    <Tab eventKey="detalhes" title="Detalhes">
+                        <AdmDevices />
+                    </Tab>
+                    <Tab eventKey="novo" title="Novo Device">
+                        <NovoDevice />
+                    </Tab>
+                </Tabs>
+            </Container>
+      </AdmContainer>
     )
 }
 

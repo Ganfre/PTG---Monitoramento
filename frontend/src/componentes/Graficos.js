@@ -8,13 +8,15 @@ const Graph = ({ data, title }) => {
       type: "line",
     },
     stroke: {
-      curve: "smooth",
+      curve: "straight",
+      width: 3,
+      colors: ['#210df5']
     },
     xaxis: {
       categories: data.map((med) => med.data),
       labels: {
         style: {
-          colors: 'white',
+          colors: '#111827',
           fontSize: '13px'
         }
       }
@@ -22,7 +24,7 @@ const Graph = ({ data, title }) => {
     yaxis: {
       labels: {
         style: {
-          colors: 'white',
+          colors: '#111827',
           fontSize: '13px'
         }
       }
@@ -34,16 +36,20 @@ const Graph = ({ data, title }) => {
       style: {
         fontSize: '20px',
         fontWeight: 'bold',
-        color: 'white'
+        color: '#111827'
       }
     },
+    fill: {
+      colors: ['#180bc210']
+    }
   };
 
   const chartSeries = [
     {
       name: title,
       data: data.map((med) => med.value),
-    },
+      type: 'area'
+    }
   ];
 
   return <Chart options={chartOptions} series={chartSeries} type="line" height={350} />;

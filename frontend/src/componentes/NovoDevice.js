@@ -5,7 +5,7 @@ import {addRegistro} from '../servicos/api'
 
 const Geral = styled.div`
     h6{
-        color: white;
+        color: #111827;
         font-weight: bold;
     }
 `;

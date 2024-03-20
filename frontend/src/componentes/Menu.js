@@ -1,22 +1,32 @@
 import React from 'react'
 import Userfront from '@userfront/toolkit'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faUser, faChartLine, faCog } from '@fortawesome/free-solid-svg-icons'
+//import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
+
 import { LogoutButton } from './autenticacao/Autenticacao';
 
 const StyledMenu = styled.div`
-    background: #00648F;
+    background: #111827;
     color: white;
-    height: 120px; 
+    width: 280px;
+    height: 100vh; 
+    position: fixed; 
+    top: 0;
+    left: 0;
     display: flex;
-    margin: auto;
-    justify-content: space-between;
     align-items: center;
-    padding: 1rem 10rem;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0px 30px 30px 0px;
+    box-shadow: 10px 0px 30px 5px rgba(0, 0, 0, 0.3);
 
     ul{
-        display: flex;
         list-style: none;
+        padding: 0;
+        flex-direction: column;
     }
 
     li{
@@ -31,36 +41,32 @@ const StyledMenu = styled.div`
         padding: none;
         font-size: 20px;
         &:hover{
-            color: #001E2B;
+            color: #c0c0c0;
         }
     }
 `;
 
-const Menu = ()=>{
-    return(
+const Menu = () => {
+    return (
         <StyledMenu>
             <Link to='/' style={{ textDecoration: 'none' }}>
-                <h1 style={{ fontSize: '38px', fontWeight: 'bold', color: 'white' }}>SensorSync</h1>
-            </Link>   
-            <ul style={{display: 'flex', textAlign: 'center', alignItems: 'baseline'}}>
-                <li><Link to='/'>Home</Link></li>
-                {/* <li><Link to='/mensagens'>Mensagens</Link></li> */}
+                <h1 style={{ fontSize: '38px', fontWeight: 'bold', color: 'white', textAlign: 'center', paddingBottom: '15px', paddingTop: '10px' }}>SensorSync</h1>
+            </Link>
+            <ul style={{ display: 'flex', paddingRight: '60px' }}>
                 {!Userfront.accessToken() && (
-                        <>
-                            {/* <li><Link to='/cadastro'>Cadastrar</Link></li> */}
-                            <li><Link to='/login'>Login</Link></li>
-                        </>
-                    )
-                }
+                    <>
+                        <li><FontAwesomeIcon icon={faUser} /><Link to='/login'> Login</Link></li>
+                        {/* <li><FontAwesomeIcon icon={faUserPlus} /><Link to='/cadastro'> Cadastro</Link></li> */}
+                    </>
+                )}
                 {Userfront.accessToken() && (
-                        <>
-                            <li><Link to='/medidas'>Medidas</Link></li>
-                            <li><Link to='/admin'>Administrador</Link></li>
-                            <li><Link to='/logout'><LogoutButton /></Link></li>
-                        </>
-                    )
-                }
-                
+                    <>
+                        <li><FontAwesomeIcon icon={faHome} /><Link to='/'> Home</Link></li>
+                        <li><FontAwesomeIcon icon={faChartLine} /><Link to='/medidas'> Medidas</Link></li>
+                        <li><FontAwesomeIcon icon={faCog} /><Link to='/admin'> Administrador</Link></li>
+                        <li style={{ display: 'flex', alignItems: 'center' }}><Link to='/logout'><LogoutButton style={{ padding: '0px', margin: '0px', width: '80px' }} /></Link></li>
+                    </>
+                )}
             </ul>
         </StyledMenu>
     )

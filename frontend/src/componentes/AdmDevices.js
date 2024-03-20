@@ -23,7 +23,7 @@ function AdmDevices() {
         editRegDevice(id, data)
     }
     
-    const [escolha, setEscolha] = useState({
+    const [escolha] = useState({
         delete:{
             header: 'Confirma Exclusão?',
             variant: 'danger',
@@ -40,7 +40,7 @@ function AdmDevices() {
             callback: ed
         }
     })
-    const [header, setHeader] = useState()
+    //const [header, setHeader] = useState()
     const [nome, setNome] = useState()
     const [descricao, setDescricao] = useState()
     const [imagem, setImagem] = useState()

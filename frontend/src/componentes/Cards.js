@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const StyledCard = styled.div`
     box-sizing: border-box;
-    background-color: #58617B;
+    background-color: #111827;
     border-color: black;
     border-radius: 1rem;
     cursor: pointer;
@@ -23,7 +23,7 @@ const Content = styled.div`
     height: 100%;
     h6{
         padding-left: 1rem;
-        color: black;
+        color: white;
         font-weight: bold;
         line-height: 12px;
      }
@@ -55,7 +55,7 @@ const Content = styled.div`
         max-width:200px;
         max-height:200px;
         width: auto;
-        height: auto;
+        height: 180px;
     }
 `;
 
@@ -78,10 +78,10 @@ const Cards = ({projeto})=>{
                     <h6T>{projeto.medidas[ultimo-1].data} {projeto.medidas[ultimo-1].hora}</h6T>
                     <h6T>{projeto.medidas[ultimo-1].netst}</h6T>
                     <Info>
-                        <h6>Temperatura: <span style={{color: projeto.medidas[ultimo-1].temperatura > 85 ? "red" : "white"}}>{projeto.medidas[ultimo-1].temperatura}°C</span></h6>
-                        <h6>Vibração: <span style={{color: projeto.medidas[ultimo-1].vibracao > 15 ? "red" : "white"}}>{projeto.medidas[ultimo-1].vibracao}Hz</span></h6>
-                        <h6>Corrente: <span style={{color: projeto.medidas[ultimo-1].corrente > 10 ? "red" : "white"}}>{projeto.medidas[ultimo-1].corrente}A</span></h6>
-                        <h6>RPM: <span style={{color: projeto.medidas[ultimo-1].rpm < 800 ? "red" : "white"}}>{projeto.medidas[ultimo-1].rpm}rpm</span></h6>
+                        <h6>Temperatura: <span style={{color: projeto.medidas[ultimo-1].temperatura > 85 ? "#ff0000" : "#00cc00", fontWeight: "bold"}}>{projeto.medidas[ultimo-1].temperatura}°C</span></h6>
+                        <h6>Vibração: <span style={{color: projeto.medidas[ultimo-1].vibracao > 15 ? "#ff0000" : "#00cc00", fontWeight: "bold"}}>{projeto.medidas[ultimo-1].vibracao}Hz</span></h6>
+                        <h6>Corrente: <span style={{color: projeto.medidas[ultimo-1].corrente > 10 ? "#ff0000" : "#00cc00", fontWeight: "bold"}}>{projeto.medidas[ultimo-1].corrente}A</span></h6>
+                        <h6>RPM: <span style={{color: projeto.medidas[ultimo-1].rpm < 800 ? "#ff0000" : "#00cc00", fontWeight: "bold"}}>{projeto.medidas[ultimo-1].rpm}rpm</span></h6>
                     </Info>
                 </Content>
             </Link>
