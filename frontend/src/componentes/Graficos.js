@@ -7,11 +7,23 @@ const Graph = ({ data, title }) => {
       height: 350,
       type: "line",
     },
+    theme: {
+      monochrome: {
+        enabled: true,
+        color: '#255aee',
+        shadeTo: 'light',
+        shadeIntensity: 0.65
+      }
+    },
     stroke: {
       curve: "straight",
       width: 3,
       colors: ['#210df5']
     },
+    markers: {
+      size: 5,
+      colors: ['#210df5']
+  },
     xaxis: {
       categories: data.map((med) => med.data),
       labels: {
@@ -40,8 +52,17 @@ const Graph = ({ data, title }) => {
       }
     },
     fill: {
-      colors: ['#180bc210']
-    }
+      type: "gradient",
+      gradient: {
+          shade: 'dark', 
+          type: 'vertical',
+          gradientToColors: ['#87CEFA'], 
+          inverseColors: false, 
+          opacityFrom: 0.8, 
+          opacityTo: 0.3, 
+          stops: [20, 100]
+      }
+  }
   };
 
   const chartSeries = [
