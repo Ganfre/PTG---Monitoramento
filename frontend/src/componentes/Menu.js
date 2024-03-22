@@ -4,9 +4,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faUser, faChartLine, faCog } from '@fortawesome/free-solid-svg-icons'
+import LogoSS from './img/LogoSS.png'
+import { LogoutButton } from './autenticacao/Autenticacao'
 //import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
-import { LogoutButton } from './autenticacao/Autenticacao';
 
 const StyledMenu = styled.div`
     background: #111827;
@@ -20,8 +21,8 @@ const StyledMenu = styled.div`
     align-items: center;
     flex-direction: column;
     padding: 1rem;
-    border-radius: 0px 30px 30px 0px;
-    box-shadow: 10px 0px 30px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 0px 30px 0px 0px;
+    box-shadow: 10px 0px 20px 5px rgba(0, 0, 0, 0.2);
 
     ul{
         list-style: none;
@@ -50,7 +51,7 @@ const Menu = () => {
     return (
         <StyledMenu>
             <Link to='/' style={{ textDecoration: 'none' }}>
-                <h1 style={{ fontSize: '38px', fontWeight: 'bold', color: 'white', textAlign: 'center', paddingBottom: '15px', paddingTop: '10px' }}>SensorSync</h1>
+                <img style={{ width: '100%', height: 'auto', padding: '30px 0px 20px 0px'}} src={LogoSS} alt="Logo" />
             </Link>
             <ul style={{ display: 'flex', paddingRight: '60px' }}>
                 {!Userfront.accessToken() && (
