@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 const StyledCard = styled.div`
     box-sizing: border-box;
     background-color: #111827;
@@ -64,10 +65,12 @@ const Info = styled.div`
     padding-bottom: 8px;
 `;
 
+
 const Cards = ({projeto})=>{
     console.log(projeto)
     var ultimo = projeto.medidas.length
     console.log(ultimo)
+
     return(
         <StyledCard>
             <Link to={`/medidas/${projeto._id}`}>

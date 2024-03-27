@@ -31,3 +31,16 @@ export const addRegistro = ({nome, email, descricao, imagem})=>{
     })
     .catch(err => console.log(err))
 }
+
+export const sendMail = ({ nome, email, mensagem }) => {
+    return axios.post('/api/devices/send', { email, nome, mensagem })
+        .then(res => {
+            console.log('Enviado', res);
+            //window.location.assign('http://localhost:3000');
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+            throw err;
+        });
+}

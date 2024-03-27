@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faUser, faChartLine, faCog } from '@fortawesome/free-solid-svg-icons'
 import LogoSS from './img/LogoSS.png'
 import { LogoutButton } from './autenticacao/Autenticacao'
+import {useApi} from '../hooks/useApi';
+import { enviarEmailAlerta } from './EnvEmail';
 //import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -48,8 +50,14 @@ const StyledMenu = styled.div`
 `;
 
 const Menu = () => {
+    const {data} = useApi('/devices')
     return (
         <StyledMenu>
+            {data?.data?.message?.map(projeto =>{
+                return(
+                    enviarEmailAlerta(projeto)
+                )
+        })}
             <Link to='/' style={{ textDecoration: 'none' }}>
                 <img style={{ width: '100%', height: 'auto', padding: '30px 0px 20px 0px'}} src={LogoSS} alt="Logo" />
             </Link>
@@ -65,6 +73,7 @@ const Menu = () => {
                         <li><FontAwesomeIcon icon={faHome} /><Link to='/'> Home</Link></li>
                         <li><FontAwesomeIcon icon={faChartLine} /><Link to='/medidas'> Medidas</Link></li>
                         <li><FontAwesomeIcon icon={faCog} /><Link to='/admin'> Administrador</Link></li>
+                        <li><Link to='/mensagens'>Mensagens</Link></li>
                         <li style={{ display: 'flex', alignItems: 'center' }}><Link to='/logout'><LogoutButton style={{ padding: '0px', margin: '0px', width: '80px' }} /></Link></li>
                     </>
                 )}
