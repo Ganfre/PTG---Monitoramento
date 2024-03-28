@@ -9,10 +9,18 @@ import Menu from './componentes/Menu';
 import DetalhesDevice from './componentes/DetalhesDevices';
 import { SignupForm, LoginForm } from './componentes/autenticacao/Autenticacao';
 import Logout from './paginas/Logout';
+import { enviarEmailAlerta } from './componentes/EnvEmail';
+import {useApi} from './hooks/useApi';
 
 function App() {
+  const {data} = useApi('/devices')
   return (
     <Router>
+      {data?.data?.message?.map(projeto =>{
+                return(
+                    enviarEmailAlerta(projeto)
+                )
+        })}
       <EstilosGlobais />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '200px' }}> 
