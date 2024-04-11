@@ -36,7 +36,7 @@ module.exports = (nome, email, mensagem)=>{
     const mail = {
         from: 'sensorsync.ptg@gmail.com',
         to: `${email}`,
-        subject: `${nome} Enviou uma Mensagem`,
+        subject: `Alerta ${nome}!`,
         text: `${mensagem}`,
     }
 
