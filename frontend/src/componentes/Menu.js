@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Userfront from '@userfront/toolkit'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faUser, faChartLine, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faUser, faChartLine, faCog, faBell } from '@fortawesome/free-solid-svg-icons'
 import LogoSS from './img/LogoSS.png'
 import { LogoutButton } from './autenticacao/Autenticacao'
 import {useApi} from '../hooks/useApi';
@@ -49,8 +49,32 @@ const StyledMenu = styled.div`
     }
 `;
 
+const BolinhaNotificacao = styled.div`
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    left: 180px;
+    top: 298.8px;
+`;
+
 const Menu = () => {
     const {data} = useApi('/devices')
+    const [dispositivosComProblemas, setDispositivosComProblemas] = useState(false);
+
+    useEffect(() => {
+        if (data?.data?.message) {
+            const dispositivosComProblemas = data.data.message.some(projeto => {
+                const ultimaMedida = projeto.medidas[projeto.medidas.length - 1];
+                return ultimaMedida.temperatura > 85 || ultimaMedida.vibracao > 15 || ultimaMedida.corrente > 10 || ultimaMedida.rpm < 800;
+            });
+            setDispositivosComProblemas(dispositivosComProblemas);
+        }
+    }, [data]);
     return (
         <StyledMenu>
             {data?.data?.message?.map(projeto =>{
@@ -73,6 +97,11 @@ const Menu = () => {
                         <li><FontAwesomeIcon icon={faHome} /><Link to='/'> Home</Link></li>
                         <li><FontAwesomeIcon icon={faChartLine} /><Link to='/medidas'> Medidas</Link></li>
                         <li><FontAwesomeIcon icon={faCog} /><Link to='/admin'> Administrador</Link></li>
+                        <li><FontAwesomeIcon icon={faBell} />
+                            <Link to='/notificacao'> Notificação 
+                                {dispositivosComProblemas && <BolinhaNotificacao />} {}
+                            </Link>
+                        </li>                        
                         {/* <li><Link to='/mensagens'>Mensagens</Link></li> */}
                         <li style={{ display: 'flex', alignItems: 'center' }}><Link to='/logout'><LogoutButton style={{ padding: '0px', margin: '0px', width: '80px' }} /></Link></li>
                     </>

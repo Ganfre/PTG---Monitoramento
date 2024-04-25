@@ -6,6 +6,7 @@ import Medidas from './paginas/Medidas';
 import Admin from './paginas/Admin';
 import Mensagens from './paginas/Mensagens';
 import Menu from './componentes/Menu';
+import Notificacao from './paginas/Notificacao';
 import DetalhesDevice from './componentes/DetalhesDevices';
 import { SignupForm, LoginForm } from './componentes/autenticacao/Autenticacao';
 import Logout from './paginas/Logout';
@@ -34,6 +35,7 @@ function App() {
             <Route path='/admin' element={<Admin />} />
             <Route path='/mensagens' element={<Mensagens />} />
             <Route path='/cadastro' element={<SignupForm />} />
+            <Route path='/notificacao' element={<Notificacao />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/logout' element={<Logout />} />
           </Routes>

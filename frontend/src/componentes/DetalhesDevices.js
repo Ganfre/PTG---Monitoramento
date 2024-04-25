@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { Container, Row, Col, Card, Table, Button } from 'react-bootstrap';
@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Graph from "./Graficos";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import FilterComponent from "./Filtro";
 
 const Titulo = styled.div`
     h1 {
@@ -33,6 +34,7 @@ const DetalhesDevice = () => {
     const { id } = useParams();
     const { data } = useApi(`/devices/detalhes/${id}`);
     const medidas = data?.data?.message?.medidas || [];
+    const [filtroData, setFiltroData] = useState(null);
 
     const ultimasCincoMedidas = medidas.slice(-5);
 
@@ -49,6 +51,16 @@ const DetalhesDevice = () => {
 
     const goBack = () => {
         window.history.back();
+    };
+
+    const filtrarPorData = (medidasFiltradas, dataInicio, dataFim) => {
+        const dataInicioFiltro = new Date(dataInicio);
+        const dataFimFiltro = new Date(dataFim);
+
+        return medidasFiltradas.filter(medida => {
+            const dataMedida = new Date(medida.data.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2-$1-$3'));
+            return dataMedida >= dataInicioFiltro && dataMedida <= dataFimFiltro;
+        });
     };
 
     return (
@@ -99,20 +111,22 @@ const DetalhesDevice = () => {
                         <Card>
                             <Card.Header>Gráficos</Card.Header>
                             <Card.Body>
+                                <FilterComponent setFiltroData={setFiltroData} />
                                 <Row>
                                     <Col md={6}>
-                                        <Graph data={medidas.map((med) => ({ data: med.data, value: med.temperatura }))} title="Temperatura (°C)" />
+                                        {}
+                                        <Graph data={filtrarPorData(medidas, filtroData?.dataInicio, filtroData?.dataFim).map((med) => ({ data: med.data, value: med.temperatura }))} title="Temperatura (°C)" />
                                     </Col>
                                     <Col md={6}>
-                                        <Graph data={medidas.map((med) => ({ data: med.data, value: med.vibracao }))} title="Vibração (Hz)" />
+                                        <Graph data={filtrarPorData(medidas, filtroData?.dataInicio, filtroData?.dataFim).map((med) => ({ data: med.data, value: med.vibracao }))} title="Vibração (Hz)" />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md={6}>
-                                        <Graph data={medidas.map((med) => ({ data: med.data, value: med.corrente }))} title="Corrente (A)" />
+                                        <Graph data={filtrarPorData(medidas, filtroData?.dataInicio, filtroData?.dataFim).map((med) => ({ data: med.data, value: med.corrente }))} title="Corrente (A)" />
                                     </Col>
                                     <Col md={6}>
-                                        <Graph data={medidas.map((med) => ({ data: med.data, value: med.rpm }))} title="RPM" />
+                                        <Graph data={filtrarPorData(medidas, filtroData?.dataInicio, filtroData?.dataFim).map((med) => ({ data: med.data, value: med.rpm }))} title="RPM" />
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -123,5 +137,6 @@ const DetalhesDevice = () => {
         </AdmContainer>
     )
 }
+
 
 export default DetalhesDevice;
