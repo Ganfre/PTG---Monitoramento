@@ -35,6 +35,9 @@ const StyledMenu = styled.div`
     li{
         padding-left: 2rem;
         padding-top: 1.5rem;
+        &:hover{
+            color: #c0c0c0;
+        }
     }
 
     a{
@@ -43,7 +46,7 @@ const StyledMenu = styled.div`
         margin: none;
         padding: none;
         font-size: 20px;
-        &:hover{
+        &:hover {
             color: #c0c0c0;
         }
     }
