@@ -103,8 +103,8 @@ const Menu = ({ onMenuToggle }) => {
                 <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingTop: '20px' }}>
                     {!Userfront.accessToken() && (
                         <>
-                            {!retractMenu && <li><FontAwesomeIcon icon={faUser} style={{ marginRight: '10px' }} /><Link to='/login'> Login</Link></li>}
-                            {retractMenu && <li><FontAwesomeIcon icon={faUser} style={{ marginRight: '10px' }} /> <Link to='/login'></Link></li>}
+                            {!retractMenu && <li><Link to='/login'><FontAwesomeIcon icon={faUser} style={{ marginRight: '10px' }} />Login</Link></li>}
+                            {retractMenu && <li><Link to='/login'><FontAwesomeIcon icon={faUser} style={{ marginRight: '10px' }} /></Link></li>}
                         </>
                     )}
                     {Userfront.accessToken() && (
