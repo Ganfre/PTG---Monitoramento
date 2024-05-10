@@ -6,7 +6,7 @@ const Inicio = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 12rem;
+    padding-left: 10rem;
     color: black;
 `;
 

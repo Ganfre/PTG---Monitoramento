@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageHome from './paginas/PageHome';
 import EstilosGlobais from './componentes/EstilosGlobais';
@@ -14,6 +14,10 @@ import Logout from './paginas/Logout';
 //import {useApi} from './hooks/useApi';
 
 function App() {
+  const [menuRetracted, setMenuRetracted] = useState(false);
+  const handleMenuToggle = (isRetracted) => {
+    setMenuRetracted(isRetracted);
+  };
   //const {data} = useApi('/devices')
   return (
     <Router>
@@ -23,9 +27,9 @@ function App() {
                 )
         })} */}
       <EstilosGlobais />
-      <div style={{ display: 'flex' }}>
-        <div style={{ width: '200px' }}> 
-          <Menu />
+      <div style={{ display: 'flex', width: '100%' }}>
+        <div style={{ width: menuRetracted ? '0px' : '200px' }}> 
+          <Menu onMenuToggle={handleMenuToggle} />
         </div>
         <div style={{ flex: 1, height: '100%' }}>
           <Routes>

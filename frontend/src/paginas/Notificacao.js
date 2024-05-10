@@ -57,7 +57,7 @@ const Medidas = () => {
 
     return (
         <ListaDevices>
-            <h1>Medidas</h1>
+            <h1>Central de alertas</h1>
             {projetosComValorVermelho.length === 0 ? (
                 <TextoNenhumDevice>Todos os dispositivos estão funcionando dentro dos parâmetros!</TextoNenhumDevice>
             ) : (
