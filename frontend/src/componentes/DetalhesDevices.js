@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Table, Button } from 'react-bootstrap';
 import styled from "styled-components";
 import Graph from "./Graficos";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTable } from '@fortawesome/free-solid-svg-icons';
 import FilterComponent from "./Filtro";
 
 const Titulo = styled.div`
@@ -30,11 +30,41 @@ const BackButton = styled.button`
     font-size: 25px;
 `;
 
+const Legenda = styled.button`
+    background-color: transparent;
+    color: gray;
+    border: none;
+    padding: 5px 0px 0px 0px;
+    cursor: pointer;
+    font-size: 25px;
+`;
+
+const LinhaTitulo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+`;
+
+const Popup = styled.div`
+    position: absolute;
+    top: 83px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: ${props => (props.show ? 'block' : 'none')};
+`;
+
 const DetalhesDevice = () => {
     const { id } = useParams();
     const { data } = useApi(`/devices/detalhes/${id}`);
     const medidas = data?.data?.message?.medidas || [];
     const [filtroData, setFiltroData] = useState(null);
+    const [showPopup, setShowPopup] = useState(false);
+
 
     const ultimasCincoMedidas = medidas.slice(-5);
 
@@ -71,7 +101,44 @@ const DetalhesDevice = () => {
                         <BackButton onClick={goBack}><FontAwesomeIcon icon={faArrowLeft} /></BackButton>
                     </Col>
                 </Row>
-                <Titulo><h1>{data?.data?.message?.nome}</h1></Titulo>
+                <LinhaTitulo>
+                    <Titulo><h1>{data?.data?.message?.nome}</h1></Titulo>
+                    <Legenda 
+                        onMouseEnter={() => setShowPopup(true)}
+                        onMouseLeave={() => setShowPopup(false)}
+                    >
+                        <FontAwesomeIcon icon={faTable} style={{ marginRight: '10px' }} />
+                        <Popup show={showPopup}>
+                            <Table hover>
+                                <thead>
+                                    <tr>
+                                        <th colSpan="2">
+                                            <h4 style={{ color: 'black', fontWeight: 'bold' }}>Parâmetros</h4>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody style={{ fontSize: '16px' }}>
+                                    <tr>
+                                        <th>Temperatura</th>
+                                        <td>85°C</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Vibração</th>
+                                        <td>15Hz</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Corrente</th>
+                                        <td>10A</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Rpm</th>
+                                        <td>800rpm</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Popup>
+                    </Legenda>
+               </LinhaTitulo>
                 <Row>
                     <Col md={12}>
                         <Card>
