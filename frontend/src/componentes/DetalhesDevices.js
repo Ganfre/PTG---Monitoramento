@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { Container, Row, Col, Card, Table, Button } from 'react-bootstrap';
@@ -58,6 +58,28 @@ const Popup = styled.div`
     display: ${props => (props.show ? 'block' : 'none')};
 `;
 
+const CustomTable = styled(Table)`
+    &.table {
+        background-color: #444;
+        color: #111827;
+    }
+    thead {
+        background-color: #555;
+    }
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: #444;
+            }
+            &:nth-child(odd) {
+                background-color: #333;
+            }
+            td {
+                color: #111827;
+            }
+        }
+    }
+`;
 const DetalhesDevice = () => {
     const { id } = useParams();
     const { data } = useApi(`/devices/detalhes/${id}`);
@@ -65,6 +87,11 @@ const DetalhesDevice = () => {
     const [filtroData, setFiltroData] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
 
+    useEffect(() => {
+        const today = new Date();
+        const dataInicio = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        setFiltroData({ dataInicio, dataFim: dataInicio });
+    }, []);
 
     const ultimasCincoMedidas = medidas.slice(-5);
 
@@ -86,6 +113,8 @@ const DetalhesDevice = () => {
     const filtrarPorData = (medidasFiltradas, dataInicio, dataFim) => {
         const dataInicioFiltro = new Date(dataInicio);
         const dataFimFiltro = new Date(dataFim);
+
+        dataFimFiltro.setDate(dataFimFiltro.getDate() + 1);
 
         return medidasFiltradas.filter(medida => {
             const dataMedida = new Date(medida.data.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2-$1-$3'));
@@ -144,7 +173,7 @@ const DetalhesDevice = () => {
                         <Card>
                             <Card.Header>Últimas Medidas</Card.Header>
                             <Card.Body>
-                                <Table striped bordered hover variant="dark">
+                                <CustomTable striped bordered hover>
                                     <thead>
                                         <tr>
                                             <th>Temperatura</th>
@@ -158,16 +187,16 @@ const DetalhesDevice = () => {
                                     <tbody>
                                         {ultimasCincoMedidas.map(med => (
                                             <tr key={med.data + med.hora}>
-                                                <td style={med.temperatura > 85 ? { color: "red", fontWeight: 'bold' } : { color: "white" }}>{med.temperatura}°C</td>
-                                                <td style={med.vibracao > 15 ? { color: "red", fontWeight: 'bold' } : { color: "white" }}>{med.vibracao} Hz</td>
-                                                <td style={med.corrente > 10 ? { color: "red", fontWeight: 'bold' } : { color: "white" }}>{med.corrente} A</td>
-                                                <td style={med.rpm < 800 ? { color: "red", fontWeight: 'bold' } : { color: "white" }}>{med.rpm}</td>
+                                                <td style={med.temperatura > 85 ? { color: "red", fontWeight: 'bold' } : { color: "black" }}>{med.temperatura}°C</td>
+                                                <td style={med.vibracao > 15 ? { color: "red", fontWeight: 'bold' } : { color: "black" }}>{med.vibracao} Hz</td>
+                                                <td style={med.corrente > 10 ? { color: "red", fontWeight: 'bold' } : { color: "black" }}>{med.corrente} A</td>
+                                                <td style={med.rpm < 800 ? { color: "red", fontWeight: 'bold' } : { color: "black" }}>{med.rpm}</td>
                                                 <td>{med.data}</td>
                                                 <td>{med.hora}h</td>
                                             </tr>
                                         ))}
                                     </tbody>
-                                </Table>
+                                </CustomTable>
                                 <Button variant="primary" onClick={exportToCsv}>Exportar CSV</Button>
                             </Card.Body>
                         </Card>

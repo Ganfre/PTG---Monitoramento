@@ -32,6 +32,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "nodemon": "^3.1.0",
     "twilio": "^5.0.1"
   },

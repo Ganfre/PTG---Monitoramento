@@ -13,6 +13,30 @@ const Foto = styled(Image)`
 
 `;
 
+const CustomTable = styled(Table)`
+    &.table {
+        background-color: #444;
+        color: #111827;
+        border-color: gray;
+    }
+    thead {
+        background-color: #555;
+    }
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: #444;
+            }
+            &:nth-child(odd) {
+                background-color: #333;
+            }
+            td {
+                color: #111827;
+            }
+        }
+    }
+`;
+
 function AdmDevices() {
     
     const del = (id)=>{
@@ -79,7 +103,7 @@ function AdmDevices() {
 
     return (
         <Container>
-                <Table striped bordered hover variant="dark">
+                <CustomTable striped bordered hover>
                     <thead>
                         <tr>
                             <th>Foto</th>
@@ -104,7 +128,7 @@ function AdmDevices() {
                                 </tr>)
                         })}
                     </tbody>
-                </Table>
+                </CustomTable>
                 <CaixaDialogo show={show} setShow={setShow} escAtual={escAtual} id={id} email={email}>
                     {escAtual.mostraBody && escAtual.body}
 
